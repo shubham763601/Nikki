@@ -124,12 +124,13 @@ const SingleHeroFrame = () => {
           </p>
         </div>
 
-        {/* Chibi Avatars Overflowing with More Glow */}
-        <div className="absolute -bottom-10 left-0 z-20 w-18 h-18 rounded-full bg-black p-0.5 shadow-[0_0_20px_rgba(251,113,133,0.7),0_0_10px_white]">
-          <img src="https://raw.githubusercontent.com/shubham763601/Nikki/main/assets/chibi-boy.jpg" alt="Chibi Boy" className="w-full h-full rounded-full object-cover" />
-        </div>
-        <div className="absolute -bottom-10 right-0 z-20 w-18 h-18 rounded-full bg-black p-0.5 shadow-[0_0_20px_rgba(251,113,133,0.7),0_0_10px_white]">
+          {/* Chibi Avatars Overflowing with More Glow */}
+        <div className="absolute -bottom-8 left-2 z-20 w-20 h-20 rounded-full bg-black p-0.5 shadow-[0_0_20px_rgba(251,113,133,0.7),0_0_10px_white]">
           <img src="https://raw.githubusercontent.com/shubham763601/Nikki/main/assets/chibi-girl.jpg" alt="Chibi Girl" className="w-full h-full rounded-full object-cover" />
+        </div>
+        
+        <div className="absolute -bottom-8 right-2 z-20 w-20 h-20 rounded-full bg-black p-0.5 shadow-[0_0_20px_rgba(251,113,133,0.7),0_0_10px_white]">
+          <img src="https://raw.githubusercontent.com/shubham763601/Nikki/main/assets/chibi-boy.jpg" alt="Chibi Boy" className="w-full h-full rounded-full object-cover" />
         </div>
       </div>
     </section>
