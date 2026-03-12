@@ -106,7 +106,7 @@ const SingleHeroFrame = () => {
         {/* Single Image Frame - Advise using a PRE-COMBINED asset (like image_20.png) */}
         <div className="absolute inset-0 rounded-t-3xl overflow-hidden z-0">
           {/* REPLACE with the DIRECT LINK to your single combined eyes asset */}
-          <img src="/path-to-combined-eyes.png" alt="Our Combined Gaze" className="w-full h-full object-cover opacity-90" />
+          <img src="https://raw.githubusercontent.com/shubham763601/Nikki/main/assets/hero-eyes.jpg" alt="Our Combined Gaze" className="w-full h-full object-cover opacity-90" />
           {/* Overlay Gradient for depth and text pop */}
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
         </div>
@@ -126,10 +126,10 @@ const SingleHeroFrame = () => {
 
         {/* Chibi Avatars Overflowing with More Glow */}
         <div className="absolute -bottom-10 left-0 z-20 w-18 h-18 rounded-full bg-black p-0.5 shadow-[0_0_20px_rgba(251,113,133,0.7),0_0_10px_white]">
-          <img src="/path-to-chibi-girl.jpg" alt="Chibi Girl" className="w-full h-full rounded-full object-cover" />
+          <img src="https://raw.githubusercontent.com/shubham763601/Nikki/main/assets/chibi-boy.jpg" alt="Chibi Boy" className="w-full h-full rounded-full object-cover" />
         </div>
         <div className="absolute -bottom-10 right-0 z-20 w-18 h-18 rounded-full bg-black p-0.5 shadow-[0_0_20px_rgba(251,113,133,0.7),0_0_10px_white]">
-          <img src="/path-to-chibi-boy.jpg" alt="Chibi Boy" className="w-full h-full rounded-full object-cover" />
+          <img src="https://raw.githubusercontent.com/shubham763601/Nikki/main/assets/chibi-girl.jpg" alt="Chibi Girl" className="w-full h-full rounded-full object-cover" />
         </div>
       </div>
     </section>
