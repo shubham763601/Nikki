@@ -4,7 +4,6 @@ import { Heart, Home, Image as ImageIcon, Mail, Star } from 'lucide-react';
 
 // --- Enhanced Animated Background Components ---
 const EnhancedStarryBackground = () => {
-  // Generate a mix of small stars and a few larger, brighter starbursts
   const baseStars = Array.from({ length: 120 }).map((_, i) => ({
     id: i,
     top: `${Math.random() * 100}%`,
@@ -24,7 +23,6 @@ const EnhancedStarryBackground = () => {
 
   return (
     <div className="fixed inset-0 z-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-rose-950/40 via-gray-900 to-black overflow-hidden pointer-events-none selection:bg-rose-500 selection:text-white">
-      {/* Base twinkling stars */}
       {baseStars.map((star) => (
         <div
           key={star.id}
@@ -38,7 +36,6 @@ const EnhancedStarryBackground = () => {
           }}
         />
       ))}
-      {/* Brighter, larger bursts for "shine" */}
       {brightBursts.map((burst) => (
         <div
           key={burst.id}
@@ -57,36 +54,33 @@ const EnhancedStarryBackground = () => {
 };
 
 const EnhancedFallingCascade = () => {
-  // Increase count and mix of hearts and sparkling particles
   const totalItems = 45; 
   const items = Array.from({ length: totalItems });
   return (
     <div className="fixed inset-0 z-10 pointer-events-none overflow-hidden">
       {items.map((_, i) => {
-        const isHeart = Math.random() > 0.6; // Mix of hearts and generic sparkles
+        const isHeart = Math.random() > 0.6; 
         return (
           <motion.div
             key={i}
             initial={{ y: -50, x: Math.random() * window.innerWidth, opacity: 0, scale: Math.random() * 0.6 + 0.4 }}
             animate={{
               y: window.innerHeight + 50,
-              x: Math.random() * window.innerWidth + (Math.random() * 100 - 50), // Greater horizontal spread
+              x: Math.random() * window.innerWidth + (Math.random() * 100 - 50), 
               opacity: [0, 1, 1, 0],
-              rotate: [0, 360 * (Math.random() > 0.5 ? 1 : -1)], // Vary rotation direction
+              rotate: [0, 360 * (Math.random() > 0.5 ? 1 : -1)], 
             }}
             transition={{
-              duration: Math.random() * 8 + 8, // Slower cascade
+              duration: Math.random() * 8 + 8, 
               repeat: Infinity,
-              delay: Math.random() * 8, // Greater delay spread
+              delay: Math.random() * 8, 
               ease: "linear"
             }}
             className="absolute text-rose-500"
           >
             {isHeart ? (
-              // Heart shape with a strong pink-gold glow
               <Heart fill="currentColor" size={24} className="drop-shadow-[0_0_15px_rgba(244,63,94,1),0_0_10px_#fdba74]" />
             ) : (
-              // Sparkling star particle with intense gold-pink glow
               <Star fill="#fdba74" className="text-pink-100 drop-shadow-[0_0_15px_white,0_0_10px_#fdba74]" size={16}/>
             )}
           </motion.div>
@@ -100,36 +94,35 @@ const EnhancedFallingCascade = () => {
 const SingleHeroFrame = () => {
   return (
     <section className="relative w-full mt-4 flex flex-col items-center px-4">
-      {/* Unified container with subtle glow border */}
-      <div className="relative w-full h-[220px] rounded-3xl overflow-visible border-2 border-rose-900/40 bg-black shadow-[0_0_30px_rgba(251,113,133,0.3)]">
+      {/* Taller container to give text its own space */}
+      <div className="relative w-full h-[270px] rounded-3xl overflow-visible border-2 border-rose-900/40 bg-black shadow-[0_0_30px_rgba(251,113,133,0.3)]">
         
-        {/* Single Image Frame - Advise using a PRE-COMBINED asset (like image_20.png) */}
-        <div className="absolute inset-0 rounded-t-3xl overflow-hidden z-0">
-          {/* REPLACE with the DIRECT LINK to your single combined eyes asset */}
-          <img src="https://raw.githubusercontent.com/shubham763601/Nikki/main/assets/hero-eyes.jpg" alt="Our Combined Gaze" className="w-full h-full object-cover opacity-90" />
-          {/* Overlay Gradient for depth and text pop */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+        {/* Image Frame - 160px height to prevent zooming. No dark opacity filter! */}
+        <div className="absolute top-0 w-full h-[160px] rounded-t-3xl overflow-hidden z-0">
+          <img src="https://raw.githubusercontent.com/shubham763601/Nikki/main/assets/hero-eyes.jpg" alt="Our Combined Gaze" className="w-full h-full object-cover object-center" />
+          {/* Subtle fade ONLY at the very bottom edge of the image to blend it */}
+          <div className="absolute bottom-0 w-full h-12 bg-gradient-to-t from-black to-transparent"></div>
         </div>
 
-        {/* Overlaid Text with Enhanced Glow and Backing */}
-        <div className="absolute bottom-6 w-full text-center z-10 px-4">
-          <h2 className="text-xl font-serif text-yellow-500 uppercase tracking-widest mb-1 drop-shadow-[0_3px_6px_rgba(0,0,0,0.8),0_0_5px_#fdba74]">
+        {/* Overlaid Text - Moved down below the image */}
+        <div className="absolute top-[170px] w-full text-center z-10 px-4">
+          <h2 className="text-xl font-serif text-yellow-500 uppercase tracking-widest mb-0.5 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8),0_0_5px_#fdba74]">
             Our Eternal Love.
           </h2>
-          <h1 className="text-2xl font-serif text-yellow-100 drop-shadow-[0_3px_6px_rgba(0,0,0,0.8),0_0_5px_white]">
+          <h1 className="text-2xl font-serif text-yellow-100 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8),0_0_5px_white]">
             Written in the Stars.
           </h1>
-          <p className="text-sm font-serif text-yellow-200/90 mt-1 italic drop-shadow-[0_2px_4px_rgba(0,0,0,0.7),0_0_5px_white]">
+          <p className="text-[13px] font-serif text-yellow-200/90 mt-1 italic drop-shadow-[0_2px_4px_rgba(0,0,0,0.7)]">
             Every glance, a new chapter.
           </p>
         </div>
 
-          {/* Chibi Avatars Overflowing with More Glow */}
-        <div className="absolute -bottom-8 left-2 z-20 w-20 h-20 rounded-full bg-black p-0.5 shadow-[0_0_20px_rgba(251,113,133,0.7),0_0_10px_white]">
+        {/* Chibi Avatars - Locked size (w-20 h-20) and heavily reduced glow */}
+        <div className="absolute -bottom-8 left-2 z-20 w-20 h-20 rounded-full bg-black p-0.5 shadow-[0_0_8px_rgba(251,113,133,0.5),0_0_3px_rgba(255,255,255,0.3)]">
           <img src="https://raw.githubusercontent.com/shubham763601/Nikki/main/assets/chibi-girl.jpg" alt="Chibi Girl" className="w-full h-full rounded-full object-cover" />
         </div>
         
-        <div className="absolute -bottom-8 right-2 z-20 w-20 h-20 rounded-full bg-black p-0.5 shadow-[0_0_20px_rgba(251,113,133,0.7),0_0_10px_white]">
+        <div className="absolute -bottom-8 right-2 z-20 w-20 h-20 rounded-full bg-black p-0.5 shadow-[0_0_8px_rgba(251,113,133,0.5),0_0_3px_rgba(255,255,255,0.3)]">
           <img src="https://raw.githubusercontent.com/shubham763601/Nikki/main/assets/chibi-boy.jpg" alt="Chibi Boy" className="w-full h-full rounded-full object-cover" />
         </div>
       </div>
@@ -161,10 +154,8 @@ export default function MobileLoveWebsite() {
       <EnhancedStarryBackground />
       <EnhancedFallingCascade />
 
-      {/* Main Mobile Container with Intense Central Glow and Soft-Shadow */}
       <main className="z-20 relative w-full max-w-md min-h-screen flex flex-col pb-28 shadow-2xl shadow-rose-900/30 overflow-y-auto">
         
-        {/* Top Navigation Links */}
         <nav className="w-full flex justify-center gap-2 sm:gap-3 pt-6 pb-2 px-2 text-[10px] sm:text-xs text-yellow-500/80 tracking-widest font-medium uppercase border-b border-rose-900/30">
           <span className="text-yellow-400 cursor-pointer">HOME</span> | 
           <span className="cursor-pointer hover:text-yellow-400 transition">OUR STORY</span> | 
@@ -173,10 +164,8 @@ export default function MobileLoveWebsite() {
           <span className="cursor-pointer hover:text-yellow-400 transition">FOR HER</span>
         </nav>
 
-        {/* Single Unified Hero Section */}
         <SingleHeroFrame />
 
-        {/* Love Counter Section with Intense Neon Glow */}
         <section className="mt-20 text-center px-4 flex flex-col items-center">
           <h3 className="text-4xl text-rose-300 mb-2 drop-shadow-[0_0_15px_rgba(251,113,133,1),0_0_10px_white]" style={{ fontFamily: "'Brush Script MT', 'Dancing Script', cursive" }}>
             Love Counter
@@ -197,7 +186,6 @@ export default function MobileLoveWebsite() {
           </p>
         </section>
 
-        {/* Glowing Heart Divider (Keep) */}
         <div className="flex items-center justify-center w-full px-12 my-10 opacity-90">
           <div className="h-[1px] flex-1 bg-gradient-to-r from-transparent to-rose-400/50"></div>
           <motion.div
@@ -210,7 +198,6 @@ export default function MobileLoveWebsite() {
           <div className="h-[1px] flex-1 bg-gradient-to-l from-transparent to-rose-400/50"></div>
         </div>
 
-        {/* Enhanced Poetry Section with Cinematic Fade-In and Soft Backing */}
         <motion.section 
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -218,7 +205,6 @@ export default function MobileLoveWebsite() {
           transition={{ duration: 1.5, ease: "easeInOut" }}
           className="text-center px-6 py-6 space-y-8 font-serif relative"
         >
-          {/* Subtle radial backing for the whole section */}
           <div className="absolute inset-0 z-[-1] bg-[radial-gradient(40%_50%_at_center,_var(--tw-gradient-stops))] from-pink-900/40 to-transparent blur-md"></div>
           
           <p className="text-xl text-rose-50 leading-relaxed drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
@@ -231,7 +217,6 @@ export default function MobileLoveWebsite() {
           </p>
         </motion.section>
 
-        {/* Fixed Bottom Navigation (Keep) */}
         <div className="fixed bottom-0 w-full max-w-md bg-black/95 backdrop-blur-sm border-t border-yellow-800/60 flex justify-between items-center px-6 py-4 z-50">
           <button className="flex flex-col items-center gap-1.5 text-yellow-400 hover:text-yellow-200 transition">
             <Home size={22} className="drop-shadow-[0_0_5px_#fdba74]" />
@@ -252,14 +237,6 @@ export default function MobileLoveWebsite() {
         </div>
 
       </main>
-      
-      {/* Required CSS for gradient mask on hero (Already present, keep) */}
-      <style dangerouslySetInnerHTML={{__html: `
-        .mask-image-b {
-          -webkit-mask-image: linear-gradient(to bottom, black 75%, transparent 100%);
-          mask-image: linear-gradient(to bottom, black 75%, transparent 100%);
-        }
-      `}} />
     </div>
   );
 }
