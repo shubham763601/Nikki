@@ -1,23 +1,34 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Heart, Home, Image as ImageIcon, Mail } from 'lucide-react';
+import { Heart, Home, Image as ImageIcon, Mail, Star } from 'lucide-react';
 
-// --- Animated Background Components ---
-const StarryBackground = () => {
-  const stars = Array.from({ length: 80 }).map((_, i) => ({
+// --- Enhanced Animated Background Components ---
+const EnhancedStarryBackground = () => {
+  // Generate a mix of small stars and a few larger, brighter starbursts
+  const baseStars = Array.from({ length: 120 }).map((_, i) => ({
     id: i,
     top: `${Math.random() * 100}%`,
     left: `${Math.random() * 100}%`,
     animationDuration: `${Math.random() * 3 + 2}s`,
     size: Math.random() * 2 + 1 + 'px',
+    color: Math.random() > 0.8 ? 'bg-pink-100' : 'bg-white',
+  }));
+
+  const brightBursts = Array.from({ length: 8 }).map((_, i) => ({
+    id: `burst-${i}`,
+    top: `${Math.random() * 100}%`,
+    left: `${Math.random() * 100}%`,
+    animationDuration: `${Math.random() * 6 + 4}s`,
+    size: Math.random() * 6 + 4 + 'px',
   }));
 
   return (
-    <div className="fixed inset-0 z-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-rose-950/40 via-gray-900 to-black overflow-hidden pointer-events-none">
-      {stars.map((star) => (
+    <div className="fixed inset-0 z-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-rose-950/40 via-gray-900 to-black overflow-hidden pointer-events-none selection:bg-rose-500 selection:text-white">
+      {/* Base twinkling stars */}
+      {baseStars.map((star) => (
         <div
           key={star.id}
-          className="absolute rounded-full bg-white animate-pulse shadow-[0_0_5px_white]"
+          className={`absolute rounded-full ${star.color} animate-pulse shadow-[0_0_5px_white]`}
           style={{
             top: star.top,
             left: star.left,
@@ -27,39 +38,101 @@ const StarryBackground = () => {
           }}
         />
       ))}
+      {/* Brighter, larger bursts for "shine" */}
+      {brightBursts.map((burst) => (
+        <div
+          key={burst.id}
+          className="absolute rounded-full bg-pink-100/70 animate-pulse shadow-[0_0_20px_white,0_0_10px_#fdba74]"
+          style={{
+            top: burst.top,
+            left: burst.left,
+            width: burst.size,
+            height: burst.size,
+            animationDuration: burst.animationDuration,
+          }}
+        />
+      ))}
     </div>
   );
 };
 
-const FallingRoses = () => {
-  const petals = Array.from({ length: 15 });
+const EnhancedFallingCascade = () => {
+  // Increase count and mix of hearts and sparkling particles
+  const totalItems = 45; 
+  const items = Array.from({ length: totalItems });
   return (
     <div className="fixed inset-0 z-10 pointer-events-none overflow-hidden">
-      {petals.map((_, i) => (
-        <motion.div
-          key={i}
-          initial={{ y: -50, x: Math.random() * window.innerWidth, opacity: 0 }}
-          animate={{
-            y: window.innerHeight + 50,
-            x: Math.random() * window.innerWidth + (Math.random() * 50 - 25),
-            opacity: [0, 1, 1, 0],
-            rotate: [0, 180, 360],
-          }}
-          transition={{
-            duration: Math.random() * 6 + 6,
-            repeat: Infinity,
-            delay: Math.random() * 5,
-            ease: "linear"
-          }}
-          className="absolute text-rose-500 drop-shadow-[0_0_8px_rgba(244,63,94,0.6)]"
-        >
-          {/* Using heart as a petal shape */}
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" className="transform scale-y-75 -rotate-45">
-             <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-          </svg>
-        </motion.div>
-      ))}
+      {items.map((_, i) => {
+        const isHeart = Math.random() > 0.6; // Mix of hearts and generic sparkles
+        return (
+          <motion.div
+            key={i}
+            initial={{ y: -50, x: Math.random() * window.innerWidth, opacity: 0, scale: Math.random() * 0.6 + 0.4 }}
+            animate={{
+              y: window.innerHeight + 50,
+              x: Math.random() * window.innerWidth + (Math.random() * 100 - 50), // Greater horizontal spread
+              opacity: [0, 1, 1, 0],
+              rotate: [0, 360 * (Math.random() > 0.5 ? 1 : -1)], // Vary rotation direction
+            }}
+            transition={{
+              duration: Math.random() * 8 + 8, // Slower cascade
+              repeat: Infinity,
+              delay: Math.random() * 8, // Greater delay spread
+              ease: "linear"
+            }}
+            className="absolute text-rose-500"
+          >
+            {isHeart ? (
+              // Heart shape with a strong pink-gold glow
+              <Heart fill="currentColor" size={24} className="drop-shadow-[0_0_15px_rgba(244,63,94,1),0_0_10px_#fdba74]" />
+            ) : (
+              // Sparkling star particle with intense gold-pink glow
+              <Star fill="#fdba74" className="text-pink-100 drop-shadow-[0_0_15px_white,0_0_10px_#fdba74]" size={16}/>
+            )}
+          </motion.div>
+        );
+      })}
     </div>
+  );
+};
+
+// --- Single, Unified Hero Frame Component ---
+const SingleHeroFrame = () => {
+  return (
+    <section className="relative w-full mt-4 flex flex-col items-center px-4">
+      {/* Unified container with subtle glow border */}
+      <div className="relative w-full h-[220px] rounded-3xl overflow-visible border-2 border-rose-900/40 bg-black shadow-[0_0_30px_rgba(251,113,133,0.3)]">
+        
+        {/* Single Image Frame - Advise using a PRE-COMBINED asset (like image_20.png) */}
+        <div className="absolute inset-0 rounded-t-3xl overflow-hidden z-0">
+          {/* REPLACE with the DIRECT LINK to your single combined eyes asset */}
+          <img src="/path-to-combined-eyes.png" alt="Our Combined Gaze" className="w-full h-full object-cover opacity-90" />
+          {/* Overlay Gradient for depth and text pop */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+        </div>
+
+        {/* Overlaid Text with Enhanced Glow and Backing */}
+        <div className="absolute bottom-6 w-full text-center z-10 px-4">
+          <h2 className="text-xl font-serif text-yellow-500 uppercase tracking-widest mb-1 drop-shadow-[0_3px_6px_rgba(0,0,0,0.8),0_0_5px_#fdba74]">
+            Our Eternal Love.
+          </h2>
+          <h1 className="text-2xl font-serif text-yellow-100 drop-shadow-[0_3px_6px_rgba(0,0,0,0.8),0_0_5px_white]">
+            Written in the Stars.
+          </h1>
+          <p className="text-sm font-serif text-yellow-200/90 mt-1 italic drop-shadow-[0_2px_4px_rgba(0,0,0,0.7),0_0_5px_white]">
+            Every glance, a new chapter.
+          </p>
+        </div>
+
+        {/* Chibi Avatars Overflowing with More Glow */}
+        <div className="absolute -bottom-10 left-0 z-20 w-18 h-18 rounded-full bg-black p-0.5 shadow-[0_0_20px_rgba(251,113,133,0.7),0_0_10px_white]">
+          <img src="/path-to-chibi-girl.jpg" alt="Chibi Girl" className="w-full h-full rounded-full object-cover" />
+        </div>
+        <div className="absolute -bottom-10 right-0 z-20 w-18 h-18 rounded-full bg-black p-0.5 shadow-[0_0_20px_rgba(251,113,133,0.7),0_0_10px_white]">
+          <img src="/path-to-chibi-boy.jpg" alt="Chibi Boy" className="w-full h-full rounded-full object-cover" />
+        </div>
+      </div>
+    </section>
   );
 };
 
@@ -68,7 +141,7 @@ export default function MobileLoveWebsite() {
   const [days, setDays] = useState(0);
 
   useEffect(() => {
-    // Dynamic Date Calculation starting from Feb 27, 2026
+    // Dynamic Date Calculation (starting from Feb 27, 2026)
     const startDate = new Date('2026-02-27T00:00:00');
     const updateCounter = () => {
       const now = new Date();
@@ -84,11 +157,11 @@ export default function MobileLoveWebsite() {
 
   return (
     <div className="relative min-h-screen w-full bg-black text-white font-sans selection:bg-rose-500 overflow-x-hidden flex justify-center">
-      <StarryBackground />
-      <FallingRoses />
+      <EnhancedStarryBackground />
+      <EnhancedFallingCascade />
 
-      {/* Main Mobile Container (9:16 aspect ratio bounds) */}
-      <main className="z-20 relative w-full max-w-md bg-transparent min-h-screen flex flex-col pb-24 shadow-2xl shadow-rose-900/20">
+      {/* Main Mobile Container with Intense Central Glow and Soft-Shadow */}
+      <main className="z-20 relative w-full max-w-md min-h-screen flex flex-col pb-28 shadow-2xl shadow-rose-900/30 overflow-y-auto">
         
         {/* Top Navigation Links */}
         <nav className="w-full flex justify-center gap-2 sm:gap-3 pt-6 pb-2 px-2 text-[10px] sm:text-xs text-yellow-500/80 tracking-widest font-medium uppercase border-b border-rose-900/30">
@@ -99,125 +172,91 @@ export default function MobileLoveWebsite() {
           <span className="cursor-pointer hover:text-yellow-400 transition">FOR HER</span>
         </nav>
 
-        {/* Hero Section (Blended Images & Text) */}
-        <section className="relative w-full mt-4 flex flex-col items-center px-4">
-          <div className="relative w-full h-[220px] rounded-2xl overflow-visible bg-gradient-to-b from-transparent to-black/80">
-            
-            {/* Split Images */}
-            <div className="absolute inset-0 flex rounded-t-2xl overflow-hidden z-0 mask-image-b">
-              {/* Replace with your left image (His eyes) */}
-              <div className="w-1/2 h-full bg-slate-800">
-                <img src="/path-to-his-eyes.jpg" alt="His Eyes" className="w-full h-full object-cover opacity-80" />
-              </div>
-              {/* Replace with your right image (Her face) */}
-              <div className="w-1/2 h-full bg-slate-700">
-                <img src="/path-to-her-face.jpg" alt="Her Face" className="w-full h-full object-cover opacity-80" />
-              </div>
-              {/* Overlay Gradient to blend bottom into text */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
-            </div>
+        {/* Single Unified Hero Section */}
+        <SingleHeroFrame />
 
-            {/* Overlaid Text */}
-            <div className="absolute bottom-6 w-full text-center z-10 px-4">
-              <h2 className="text-xl font-serif text-yellow-500 uppercase tracking-widest mb-1 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
-                Our Eternal Love.
-              </h2>
-              <h1 className="text-2xl font-serif text-yellow-100 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
-                Written in the Stars.
-              </h1>
-              <p className="text-sm font-serif text-yellow-200/80 mt-1 italic drop-shadow-md">
-                Every glance, a new chapter.
-              </p>
-            </div>
-
-            {/* Chibi Avatars Overflowing */}
-            <div className="absolute -bottom-8 left-0 z-20 w-16 h-16 rounded-full bg-black p-0.5 shadow-[0_0_15px_rgba(251,113,133,0.5)]">
-              <img src="/path-to-chibi-girl.jpg" alt="Chibi Girl" className="w-full h-full rounded-full object-cover" />
-            </div>
-            <div className="absolute -bottom-8 right-0 z-20 w-16 h-16 rounded-full bg-black p-0.5 shadow-[0_0_15px_rgba(251,113,133,0.5)]">
-              <img src="/path-to-chibi-boy.jpg" alt="Chibi Boy" className="w-full h-full rounded-full object-cover" />
-            </div>
-          </div>
-        </section>
-
-        {/* Love Counter Section */}
-        <section className="mt-16 text-center px-4 flex flex-col items-center">
-          <h3 className="text-4xl text-rose-400 mb-2 drop-shadow-[0_0_10px_rgba(251,113,133,0.6)]" style={{ fontFamily: "'Brush Script MT', 'Dancing Script', cursive" }}>
+        {/* Love Counter Section with Intense Neon Glow */}
+        <section className="mt-20 text-center px-4 flex flex-col items-center">
+          <h3 className="text-4xl text-rose-300 mb-2 drop-shadow-[0_0_15px_rgba(251,113,133,1),0_0_10px_white]" style={{ fontFamily: "'Brush Script MT', 'Dancing Script', cursive" }}>
             Love Counter
           </h3>
           
           <div className="flex items-center justify-center gap-3">
-            <span className="text-6xl font-serif font-bold text-rose-300 drop-shadow-[0_0_15px_rgba(244,63,94,0.5)]">
+            <span className="text-7xl font-serif font-bold text-rose-200 drop-shadow-[0_0_20px_rgba(244,63,94,0.8),0_0_10px_white]">
               {days}
             </span>
             <div className="text-left leading-tight">
-              <span className="block text-yellow-500 font-serif tracking-widest text-lg uppercase">Beautiful Days</span>
-              <span className="block text-yellow-500 font-serif tracking-widest text-lg uppercase">Together.</span>
+              <span className="block text-yellow-500 font-serif tracking-widest text-lg uppercase drop-shadow-[0_0_5px_#fdba74]">Beautiful Days</span>
+              <span className="block text-yellow-500 font-serif tracking-widest text-lg uppercase drop-shadow-[0_0_5px_#fdba74]">Together.</span>
             </div>
           </div>
           
-          <p className="text-yellow-500/80 mt-3 font-serif tracking-wide text-sm">
+          <p className="text-yellow-500/80 mt-3 font-serif tracking-wide text-sm drop-shadow-md">
             Starting Feb 27, 2026.
           </p>
         </section>
 
-        {/* Glowing Heart Divider */}
-        <div className="flex items-center justify-center w-full px-12 my-8 opacity-80">
+        {/* Glowing Heart Divider (Keep) */}
+        <div className="flex items-center justify-center w-full px-12 my-10 opacity-90">
           <div className="h-[1px] flex-1 bg-gradient-to-r from-transparent to-rose-400/50"></div>
           <motion.div
-            animate={{ scale: [1, 1.1, 1] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="mx-4 text-rose-300 drop-shadow-[0_0_15px_rgba(244,63,94,1)]"
+            animate={{ scale: [1, 1.15, 1], rotate: [0, 5, -5, 0] }}
+            transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+            className="mx-4 text-rose-200 drop-shadow-[0_0_20px_rgba(244,63,94,1),0_0_10px_white]"
           >
-            <Heart fill="currentColor" size={32} />
+            <Heart fill="currentColor" size={36} />
           </motion.div>
           <div className="h-[1px] flex-1 bg-gradient-to-l from-transparent to-rose-400/50"></div>
         </div>
 
-        {/* Poetry Section */}
+        {/* Enhanced Poetry Section with Cinematic Fade-In and Soft Backing */}
         <motion.section 
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          className="text-center px-6 space-y-6 font-serif"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 1.5, ease: "easeInOut" }}
+          className="text-center px-6 py-6 space-y-8 font-serif relative"
         >
-          <p className="text-lg text-rose-50 leading-relaxed drop-shadow-md">
+          {/* Subtle radial backing for the whole section */}
+          <div className="absolute inset-0 z-[-1] bg-[radial-gradient(40%_50%_at_center,_var(--tw-gradient-stops))] from-pink-900/40 to-transparent blur-md"></div>
+          
+          <p className="text-xl text-rose-50 leading-relaxed drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
             In your eyes, I find my home,<br/>
             A universe where I am never alone.
           </p>
-          <p className="text-lg text-rose-50 leading-relaxed drop-shadow-md">
+          <p className="text-xl text-rose-50 leading-relaxed drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] pb-10">
             The stars whisper our names at night,<br/>
             Our love, the universe's sweetest light.
           </p>
         </motion.section>
 
-        {/* Fixed Bottom Navigation */}
-        <div className="fixed bottom-0 w-full max-w-md bg-black/90 backdrop-blur-md border-t border-yellow-700/50 flex justify-between items-center px-6 py-3 z-50">
-          <button className="flex flex-col items-center gap-1 text-yellow-500 hover:text-yellow-300 transition">
-            <Home size={20} />
-            <span className="text-[10px] tracking-wide">Home</span>
+        {/* Fixed Bottom Navigation (Keep) */}
+        <div className="fixed bottom-0 w-full max-w-md bg-black/95 backdrop-blur-sm border-t border-yellow-800/60 flex justify-between items-center px-6 py-4 z-50">
+          <button className="flex flex-col items-center gap-1.5 text-yellow-400 hover:text-yellow-200 transition">
+            <Home size={22} className="drop-shadow-[0_0_5px_#fdba74]" />
+            <span className="text-[10px] tracking-wide font-medium">Home</span>
           </button>
-          <button className="flex flex-col items-center gap-1 text-yellow-600 hover:text-yellow-300 transition">
-            <Heart size={20} />
-            <span className="text-[10px] tracking-wide">Our Story</span>
+          <button className="flex flex-col items-center gap-1.5 text-yellow-600 hover:text-yellow-400 transition">
+            <Heart size={22} />
+            <span className="text-[10px] tracking-wide font-medium">Our Story</span>
           </button>
-          <button className="flex flex-col items-center gap-1 text-yellow-600 hover:text-yellow-300 transition">
-            <ImageIcon size={20} />
-            <span className="text-[10px] tracking-wide">Memories</span>
+          <button className="flex flex-col items-center gap-1.5 text-yellow-600 hover:text-yellow-400 transition">
+            <ImageIcon size={22} />
+            <span className="text-[10px] tracking-wide font-medium">Memories</span>
           </button>
-          <button className="flex flex-col items-center gap-1 text-yellow-600 hover:text-yellow-300 transition">
-            <Mail size={20} />
-            <span className="text-[10px] tracking-wide">Letters</span>
+          <button className="flex flex-col items-center gap-1.5 text-yellow-600 hover:text-yellow-400 transition">
+            <Mail size={22} />
+            <span className="text-[10px] tracking-wide font-medium">Letters</span>
           </button>
         </div>
 
       </main>
       
-      {/* Required CSS for gradient mask (Add this to your global CSS file if needed) */}
+      {/* Required CSS for gradient mask on hero (Already present, keep) */}
       <style dangerouslySetInnerHTML={{__html: `
         .mask-image-b {
-          -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
-          mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+          -webkit-mask-image: linear-gradient(to bottom, black 75%, transparent 100%);
+          mask-image: linear-gradient(to bottom, black 75%, transparent 100%);
         }
       `}} />
     </div>
