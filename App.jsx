@@ -93,36 +93,43 @@ const EnhancedFallingCascade = () => {
 // --- Single, Unified Hero Frame Component ---
 const SingleHeroFrame = () => {
   return (
-    <section className="relative w-full mt-4 flex flex-col items-center px-4">
-      {/* Taller container to give text its own space */}
-      <div className="relative w-full h-[270px] rounded-3xl overflow-visible border-2 border-rose-900/40 bg-black shadow-[0_0_30px_rgba(251,113,133,0.3)]">
+    <section className="relative w-full mt-4 flex flex-col items-center px-4 z-10">
+      {/* Container perfectly sized for a panoramic image without aggressive zooming */}
+      <div className="relative w-full h-[240px] rounded-3xl overflow-visible border border-rose-500/30 bg-black shadow-[0_0_20px_rgba(225,29,72,0.2)]">
         
-        {/* Image Frame - 160px height to prevent zooming. No dark opacity filter! */}
-        <div className="absolute top-0 w-full h-[160px] rounded-t-3xl overflow-hidden z-0">
-          <img src="https://raw.githubusercontent.com/shubham763601/Nikki/main/assets/hero-eyes.jpg" alt="Our Combined Gaze" className="w-full h-full object-cover object-center" />
-          {/* Subtle fade ONLY at the very bottom edge of the image to blend it */}
-          <div className="absolute bottom-0 w-full h-12 bg-gradient-to-t from-black to-transparent"></div>
+        {/* Background Image filling the container */}
+        <div className="absolute inset-0 rounded-3xl overflow-hidden z-0">
+          {/* Your Image: Bright and clear, taking up the whole space naturally */}
+          <img 
+            src="https://raw.githubusercontent.com/shubham763601/Nikki/main/assets/hero-eyes.jpg" 
+            alt="Our Combined Gaze" 
+            className="w-full h-full object-cover object-center" 
+          />
+          {/* The Magical Fade: ONLY at the bottom 40% (dark pink/black fade) */}
+          <div className="absolute bottom-0 w-full h-[110px] bg-gradient-to-t from-black via-rose-950/90 to-transparent"></div>
         </div>
 
-        {/* Overlaid Text - Moved down below the image */}
-        <div className="absolute top-[170px] w-full text-center z-10 px-4">
-          <h2 className="text-xl font-serif text-yellow-500 uppercase tracking-widest mb-0.5 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8),0_0_5px_#fdba74]">
+        {/* Text Overlay - Positioned securely inside the fade */}
+        <div className="absolute bottom-4 w-full text-center z-10 px-4">
+          {/* Line 1: Sits slightly above the deepest part of the fade */}
+          <h2 className="text-[15px] font-serif text-yellow-500 uppercase tracking-widest mb-0.5 drop-shadow-[0_2px_4px_rgba(0,0,0,1)]">
             Our Eternal Love.
           </h2>
-          <h1 className="text-2xl font-serif text-yellow-100 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8),0_0_5px_white]">
+          {/* Line 2 & 3: Safely inside the dark fade */}
+          <h1 className="text-[26px] font-serif text-yellow-50 leading-tight drop-shadow-[0_2px_4px_rgba(0,0,0,1)]">
             Written in the Stars.
           </h1>
-          <p className="text-[13px] font-serif text-yellow-200/90 mt-1 italic drop-shadow-[0_2px_4px_rgba(0,0,0,0.7)]">
+          <p className="text-[13px] font-serif text-yellow-200/90 mt-1 italic drop-shadow-[0_2px_4px_rgba(0,0,0,1)]">
             Every glance, a new chapter.
           </p>
         </div>
 
-        {/* Chibi Avatars - Locked size (w-20 h-20) and heavily reduced glow */}
-        <div className="absolute -bottom-8 left-2 z-20 w-20 h-20 rounded-full bg-black p-0.5 shadow-[0_0_8px_rgba(251,113,133,0.5),0_0_3px_rgba(255,255,255,0.3)]">
+        {/* Chibi Avatars - Locked to bottom corners with soft, minimal glow */}
+        <div className="absolute -bottom-6 left-2 z-20 w-20 h-20 rounded-full bg-black p-0.5 shadow-[0_0_8px_rgba(251,113,133,0.5)]">
           <img src="https://raw.githubusercontent.com/shubham763601/Nikki/main/assets/chibi-girl.jpg" alt="Chibi Girl" className="w-full h-full rounded-full object-cover" />
         </div>
         
-        <div className="absolute -bottom-8 right-2 z-20 w-20 h-20 rounded-full bg-black p-0.5 shadow-[0_0_8px_rgba(251,113,133,0.5),0_0_3px_rgba(255,255,255,0.3)]">
+        <div className="absolute -bottom-6 right-2 z-20 w-20 h-20 rounded-full bg-black p-0.5 shadow-[0_0_8px_rgba(251,113,133,0.5)]">
           <img src="https://raw.githubusercontent.com/shubham763601/Nikki/main/assets/chibi-boy.jpg" alt="Chibi Boy" className="w-full h-full rounded-full object-cover" />
         </div>
       </div>
