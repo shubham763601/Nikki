@@ -189,7 +189,7 @@ const LettersPage = () => {
         <div className="absolute top-3 left-3 text-rose-400/80"><Heart fill="currentColor" size={24}/></div>
 
         <div className="text-rose-50 leading-loose space-y-7 text-[15px]">
-          <p className="drop-shadow-md">My Dearest Love,</p>
+          <p className="drop-shadow-md">My Dearest Love Nikki,</p>
           <p className="italic drop-shadow-md">Every single day I spend with you is like a beautiful dream come true. You are my everything.</p>
           
           {/* Scattered affectionate phrases */}
@@ -197,7 +197,7 @@ const LettersPage = () => {
           
           <p className="drop-shadow-md">No matter what, I'll always be by your side, loving you, supporting you, and celebrating you.</p>
           
-          <p className="text-xl text-rose-100 font-bold drop-shadow-[0_0_8px_rgba(251,113,133,0.6)]">I love you sweetu 🥰😘 all over the letter</p>
+          <p className="text-xl text-rose-100 font-bold drop-shadow-[0_0_8px_rgba(251,113,133,0.6)]">I love you sweetu 🥰😘 </p>
           
           <p className="drop-shadow-md">Thank you for bringing so much color and love to my life.</p>
           <p className="italic drop-shadow-md pb-6">Your biggest admirer,</p>
