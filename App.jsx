@@ -94,37 +94,35 @@ const EnhancedFallingCascade = () => {
 const SingleHeroFrame = () => {
   return (
     <section className="relative w-full mt-4 flex flex-col items-center px-4 z-10">
-      {/* Container perfectly sized for a panoramic image without aggressive zooming */}
-      <div className="relative w-full h-[240px] rounded-3xl overflow-visible border border-rose-500/30 bg-black shadow-[0_0_20px_rgba(225,29,72,0.2)]">
+      {/* The main card - Dark background at the bottom for text to rest on */}
+      <div className="relative w-full rounded-3xl border border-rose-500/30 bg-gradient-to-b from-black to-[#1a050f] shadow-[0_0_20px_rgba(225,29,72,0.2)] pb-10">
         
-        {/* Background Image filling the container */}
-        <div className="absolute inset-0 rounded-3xl overflow-hidden z-0">
-          {/* Your Image: Bright and clear, taking up the whole space naturally */}
+        {/* TOP HALF: Image Container - Fixed smaller height (130px) so wide panorama doesn't zoom! */}
+        <div className="relative w-full h-[130px] rounded-t-3xl overflow-hidden z-0">
           <img 
             src="https://raw.githubusercontent.com/shubham763601/Nikki/main/assets/hero-eyes.jpg" 
             alt="Our Combined Gaze" 
             className="w-full h-full object-cover object-center" 
           />
-          {/* The Magical Fade: ONLY at the bottom 40% (dark pink/black fade) */}
-          <div className="absolute bottom-0 w-full h-[110px] bg-gradient-to-t from-black via-rose-950/90 to-transparent"></div>
+          {/* Subtle fade at the bottom edge to blend into the black text area below */}
+          <div className="absolute bottom-0 w-full h-12 bg-gradient-to-t from-black to-transparent"></div>
         </div>
 
-        {/* Text Overlay - Positioned securely inside the fade */}
-        <div className="absolute bottom-4 w-full text-center z-10 px-4">
-          {/* Line 1: Sits slightly above the deepest part of the fade */}
-          <h2 className="text-[15px] font-serif text-yellow-500 uppercase tracking-widest mb-0.5 drop-shadow-[0_2px_4px_rgba(0,0,0,1)]">
+        {/* BOTTOM HALF: Text Overlay - Physically moved down! 
+            The "-mt-6" pulls it up just enough so the first line touches the image fade. */}
+        <div className="relative w-full text-center z-10 px-2 -mt-6">
+          <h2 className="text-[13px] font-serif text-yellow-500 uppercase tracking-widest mb-1 drop-shadow-[0_2px_4px_rgba(0,0,0,1)]">
             Our Eternal Love.
           </h2>
-          {/* Line 2 & 3: Safely inside the dark fade */}
-          <h1 className="text-[26px] font-serif text-yellow-50 leading-tight drop-shadow-[0_2px_4px_rgba(0,0,0,1)]">
+          <h1 className="text-[25px] font-serif text-yellow-50 leading-tight drop-shadow-[0_2px_4px_rgba(0,0,0,1)]">
             Written in the Stars.
           </h1>
-          <p className="text-[13px] font-serif text-yellow-200/90 mt-1 italic drop-shadow-[0_2px_4px_rgba(0,0,0,1)]">
+          <p className="text-[12px] font-serif text-yellow-200/90 mt-1.5 italic drop-shadow-[0_2px_4px_rgba(0,0,0,1)]">
             Every glance, a new chapter.
           </p>
         </div>
 
-        {/* Chibi Avatars - Locked to bottom corners with soft, minimal glow */}
+        {/* Chibi Avatars - Anchored safely to the bottom edges */}
         <div className="absolute -bottom-6 left-2 z-20 w-20 h-20 rounded-full bg-black p-0.5 shadow-[0_0_8px_rgba(251,113,133,0.5)]">
           <img src="https://raw.githubusercontent.com/shubham763601/Nikki/main/assets/chibi-girl.jpg" alt="Chibi Girl" className="w-full h-full rounded-full object-cover" />
         </div>
